@@ -1,0 +1,289 @@
+/* ============================================================
+   Zion's Men's PG — Global Stylesheet
+   Tailwind directives + custom base/component/utility layers
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Reset & Root Tokens ──────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --gold:       #F5A623;
+    --gold-deep:  #C8860D;
+    --gold-hover: #D4891A;
+    --bg-page:    #0A0C10;
+    --bg-card:    #1A1F2B;
+    --bg-dark:    #141820;
+    --border:     #252B38;
+    --text-head:  #F0EDE6;
+    --text-body:  #B0BAD0;
+    --text-muted: #6B7794;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-zion-black text-cream-muted font-body;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-cream;
+    line-height: 1.15;
+  }
+
+  /* Scrollbar — premium dark look */
+  ::-webkit-scrollbar              { width: 6px; }
+  ::-webkit-scrollbar-track        { background: var(--bg-dark); }
+  ::-webkit-scrollbar-thumb        { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover  { background: var(--gold-deep); }
+
+  /* Selection */
+  ::selection {
+    background-color: rgba(245, 166, 35, 0.25);
+    color: #F0EDE6;
+  }
+
+  /* Focus rings — gold accent */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Smooth image rendering */
+  img {
+    @apply block max-w-full;
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* ── Component Layer ───────────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Buttons ────────────────────────────────────────────────────────────── */
+
+  /* Primary gold CTA — "BOOK NOW", "BOOK YOUR ROOM" */
+  .btn-gold {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-btn
+           bg-gold font-display font-bold text-zion-black text-sm tracking-wide
+           transition-all duration-250 ease-smooth;
+    box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+  }
+  .btn-gold:hover {
+    @apply bg-gold-600;
+    box-shadow: 0 6px 25px rgba(245, 166, 35, 0.55);
+    transform: translateY(-1px);
+  }
+  .btn-gold:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(245, 166, 35, 0.35);
+  }
+
+  /* Ghost / outline button — "LOGIN", "VIEW ROOMS" */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-btn
+           border border-gold-500/60 text-gold font-display font-semibold text-sm tracking-wide
+           transition-all duration-250 ease-smooth;
+  }
+  .btn-outline:hover {
+    @apply border-gold bg-gold/10;
+  }
+
+  /* Dark flat button — "VIEW DETAILS" in room cards */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-btn
+           bg-zion-dark border border-zion-border text-cream-muted font-display font-semibold text-sm
+           transition-all duration-250 ease-smooth;
+  }
+  .btn-dark:hover {
+    @apply bg-zion-card border-gold/40 text-gold;
+  }
+
+  /* ── Cards ──────────────────────────────────────────────────────────────── */
+
+  .card {
+    @apply bg-zion-card rounded-card border border-zion-border
+           transition-all duration-350 ease-smooth;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  }
+  .card:hover {
+    @apply border-gold/25;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(245, 166, 35, 0.15);
+    transform: translateY(-3px);
+  }
+
+  /* Facility icon card */
+  .facility-card {
+    @apply flex flex-col items-center gap-3 p-5 rounded-card
+           bg-zion-dark border border-zion-border text-center
+           transition-all duration-250 ease-smooth;
+  }
+  .facility-card:hover {
+    @apply border-gold/30 bg-zion-card;
+    transform: translateY(-2px);
+  }
+
+  /* ── Section layout ─────────────────────────────────────────────────────── */
+
+  .section-pad {
+    @apply py-16 md:py-24;
+  }
+
+  .container-zion {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section heading with gold underline accent */
+  .section-heading {
+    @apply font-display font-bold text-cream mb-2;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    letter-spacing: -0.01em;
+  }
+
+  .section-accent {
+    @apply block h-0.5 w-10 mt-3 mb-8 rounded-full bg-gold;
+  }
+
+  /* ── Navigation ─────────────────────────────────────────────────────────── */
+
+  .nav-link {
+    @apply font-display font-semibold text-sm tracking-wide text-cream-muted
+           transition-colors duration-200;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    @apply text-gold;
+  }
+
+  /* ── Availability Badges ────────────────────────────────────────────────── */
+
+  .badge {
+    @apply absolute top-3 left-3 px-2.5 py-0.5 rounded-badge
+           font-display font-bold text-xs tracking-wide text-white;
+  }
+  .badge-available { @apply bg-available; }
+  .badge-limited   { @apply bg-limited; }
+  .badge-full      { @apply bg-full; }
+
+  /* ── Form controls ──────────────────────────────────────────────────────── */
+
+  .input-dark {
+    @apply w-full bg-zion-dark border border-zion-border rounded-btn
+           px-4 py-3 text-cream placeholder-cream-subtle text-sm font-body
+           transition-all duration-200;
+  }
+  .input-dark:focus {
+    @apply outline-none border-gold/60 bg-zion-card;
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.12);
+  }
+
+  /* ── Star rating ────────────────────────────────────────────────────────── */
+
+  .stars {
+    @apply flex gap-0.5 text-gold text-base;
+  }
+
+  /* ── Skeleton loader ────────────────────────────────────────────────────── */
+
+  .skeleton {
+    @apply bg-zion-border rounded animate-pulse;
+    background: linear-gradient(90deg,
+      #252B38 25%,
+      #2e3547 50%,
+      #252B38 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  /* ── Price display ──────────────────────────────────────────────────────── */
+
+  .price-tag {
+    @apply font-display font-bold text-gold text-lg;
+  }
+  .price-tag span {
+    @apply text-xs font-body text-cream-subtle font-normal;
+  }
+
+  /* ── Gold divider line ──────────────────────────────────────────────────── */
+
+  .gold-divider {
+    @apply block h-px w-full my-8;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(245, 166, 35, 0.4) 50%,
+      transparent 100%
+    );
+  }
+}
+
+/* ── Utility Layer ─────────────────────────────────────────────────────────── */
+@layer utilities {
+
+  /* Text gradient — gold shimmer for hero highlights */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #F5A623 0%, #FCD34D 50%, #F5A623 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass effect for the search bar */
+  .glass {
+    background: rgba(26, 31, 43, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Overlay for hero image */
+  .hero-overlay {
+    background: linear-gradient(
+      105deg,
+      rgba(10, 12, 16, 0.97) 0%,
+      rgba(10, 12, 16, 0.82) 55%,
+      rgba(10, 12, 16, 0.35) 100%
+    );
+  }
+
+  /* Animate in sequence with stagger */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+
+  /* Hide scrollbar but keep scrollability */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Aspect ratio helpers */
+  .aspect-room  { aspect-ratio: 4/3; }
+  .aspect-hero  { aspect-ratio: 16/9; }
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────────── */
+@media print {
+  body { background: #fff; color: #000; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
